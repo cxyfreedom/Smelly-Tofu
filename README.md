@@ -3,4 +3,4 @@
  - [cxyfreedom](https://github.com/cxyfreedom)
  - [Aisaka Tiger](https://github.com/AisakaTiger)
  - [ViolaMiki](https://github.com/ViolaMiki)
- - [Xi Gua]()
+ - [Xi Gua](https://github.com/TyrnDa)

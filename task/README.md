@@ -32,3 +32,9 @@ task01
 
  - 除了代码以外的文档默认使用`markdown`语法编写
  - 最后把各个成员的代码合并成一份，我会放在每个`task`下的`final`目录
+
+## Demo地址
+
+ - 零基础HTML编码
+   - [cxyfreedom](http://cxyfreedom.github.io/Smelly-Tofu/task%2Ftask01%2Fcxyfreedom%2Fcode%2Ftask01.html)
+   - [Aisaka Tiger](http://cxyfreedom.github.io/Smelly-Tofu/task%2Ftask01%2FAisaka%20Tiger%2Fcode%2Ftask01-AisakaTiger.html)
