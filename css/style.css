@@ -237,7 +237,7 @@ a{
     -o-animation:moveDown 0.6s ease-in-out 0.2s backwards;
     -ms-animation:moveDown 0.6s ease-in-out 0.2s backwards;
     animation:moveDown 0.6s ease-in-out 0.2s backwards;
-};
+}
 
 @-webkit-keyframes moveDown{
     0%{
@@ -318,7 +318,7 @@ a{
     -o-animation:moveUp 0.6s ease-in-out 0.2s backwards;
     -ms-animation:moveUp 0.6s ease-in-out 0.2s backwards;
     animation:moveUp 0.6s ease-in-out 0.2s backwards;
-};
+}
 
 @-webkit-keyframes moveUp{
     0%{
