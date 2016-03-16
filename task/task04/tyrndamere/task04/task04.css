@@ -1,0 +1,16 @@
+.content{background-color: #ccc; width: 400px; height:200px; position: absolute; top: 50%; left: 50%; margin-left: -200px; margin-top: -100px; overflow: hidden;}
+.circle{width: 100px; height: 100px; border-radius: 50%; background-color: #fc0; position: absolute;}
+.circle.l-t{left: -50px; top: -50px;}
+.circle.r-b{right: -50px; bottom: -50px;}
+
+
+
+
+
+
+
+
+
+
+
+
