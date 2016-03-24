@@ -51,7 +51,7 @@ function confirm_dir(){
             return "left";
         case 90:
         case -270:
-            return "up";
+            return "top";
         case 180:
         case -180:
             return "right";
@@ -122,106 +122,82 @@ function exec_cmd(cmd){
             break;
         case "TRA LEF":
             cur_dir = "left";
-            if (step != 0){
-                return;
-            }
             move();
             break;
         case "TRA TOP":
             cur_dir = "top";
-            if (step != 0){
-                return;
-            }
             move();
             break;
         case "TRA RIG":
             cur_dir = "right";
-            if (step != 0){
-                return;
-            }
             move();
             break;
         case "TRA BOT":
             cur_dir = "down";
-            if (step != 0){
-                return;
-            }
             move();
             break;
         case "MOV LEF":
-            if (cur_x > 1){
-                if (cur_dir == "up"){
-                    rotate_value -= 90;
-                }
-                else if (cur_dir == "down"){
-                    rotate_value += 90;
-                }
-                else if (cur_dir == "right"){
-                    rotate_value += 180;
-                }
-                document.getElementById('main').style.transform = "rotate(" + rotate_value + "deg)";
+            if (cur_dir == "top"){
+                rotate_value -= 90;
+            }
+            else if (cur_dir == "down"){
+                rotate_value += 90;
+            }
+            else if (cur_dir == "right"){
+                rotate_value += 180;
+            }
+            document.getElementById('main').style.transform = "rotate(" + rotate_value + "deg)";
+            if (cur_x > 1) {
                 cur_dir = "left";
                 move();
             }
-            else{
-                alert("Couldn't go left");
-            }
             break;
         case "MOV TOP":
+            if (cur_dir == "right"){
+                rotate_value -= 90;
+            }
+            else if (cur_dir == "left"){
+                rotate_value += 90;
+            }
+            else if (cur_dir == "down"){
+                rotate_value += 180;
+            }
+            document.getElementById('main').style.transform = "rotate(" + rotate_value + "deg)";
             if (cur_y > 1){
-                if (cur_dir == "right"){
-                    rotate_value -= 90;
-                }
-                else if (cur_dir == "left"){
-                    rotate_value += 90;
-                }
-                else if (cur_dir == "down"){
-                    rotate_value += 180;
-                }
-                document.getElementById('main').style.transform = "rotate(" + rotate_value + "deg)";
                 cur_dir = "top";
                 move();
             }
-            else{
-                alert("Couldn't go top");
-            }
             break;
         case "MOV RIG":
+            if (cur_dir == "down"){
+                rotate_value -= 90;
+            }
+            else if (cur_dir == "top"){
+                rotate_value += 90;
+            }
+            else if (cur_dir == "left"){
+                rotate_value += 180;
+            }
+            document.getElementById('main').style.transform = "rotate(" + rotate_value + "deg)";
             if (cur_x < 10){
-                if (cur_dir == "down"){
-                    rotate_value -= 90;
-                }
-                else if (cur_dir == "up"){
-                    rotate_value += 90;
-                }
-                else if (cur_dir == "left"){
-                    rotate_value += 180;
-                }
-                document.getElementById('main').style.transform = "rotate(" + rotate_value + "deg)";
                 cur_dir = "right";
                 move();
             }
-            else{
-                alert("Couldn't go right");
-            }
             break;
         case "MOV BOT":
+            if (cur_dir == "left"){
+                rotate_value -= 90;
+            }
+            else if (cur_dir == "right"){
+                rotate_value += 90;
+            }
+            else if (cur_dir == "top"){
+                rotate_value += 180;
+            }
+            document.getElementById('main').style.transform = "rotate(" + rotate_value + "deg)";
             if (cur_y < 10){
-                if (cur_dir == "left"){
-                    rotate_value -= 90;
-                }
-                else if (cur_dir == "right"){
-                    rotate_value += 90;
-                }
-                else if (cur_dir == "up"){
-                    rotate_value += 180;
-                }
-                document.getElementById('main').style.transform = "rotate(" + rotate_value + "deg)";
                 cur_dir = "down";
                 move();
-            }
-            else{
-                alert("Couldn't go down");
             }
             break;
         default:
@@ -266,7 +242,6 @@ function move_by_cmd(){
                 else{
                     step = 0;
                     window.clearInterval(ret);
-                    alert("Couldn't go left");
                 }
                 break;
             case "top":
@@ -276,7 +251,6 @@ function move_by_cmd(){
                 else {
                     step = 0;
                     window.clearInterval(ret);
-                    alert("Couldn't go top");
                 }
                 break;
             case "right":
@@ -286,7 +260,6 @@ function move_by_cmd(){
                 else {
                     step = 0;
                     window.clearInterval(ret);
-                    alert("Couldn't go right");
                 }
                 break;
             case "down":
@@ -296,7 +269,6 @@ function move_by_cmd(){
                 else {
                     step = 0;
                     window.clearInterval(ret);
-                    alert("Couldn't go down");
                 }
                 break;
         }
@@ -308,7 +280,10 @@ function move_by_cmd(){
 }
 
 function move(){
-    ret = setInterval("move_by_cmd()", 15);
+    if (step != 0){
+        return;
+    }
+    ret = setInterval("move_by_cmd()", 5);
 }
 
 function run(){
