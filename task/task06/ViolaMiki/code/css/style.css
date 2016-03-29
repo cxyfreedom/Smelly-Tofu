@@ -169,7 +169,8 @@ p {
     line-height: 10px;
     display: inline-block;
     margin-top: 2px;
-    font-family: 'KaiTi'
+    font-family: 'KaiTi';
+    margin-top: 5px;
 }
 .a2_right #maxNum {
     font-size: 116px;
@@ -182,19 +183,133 @@ p {
     font-size: 55px;
     color: #cc8091;
     margin: 0px;
-    font-weight: 100;
+    font-weight: 400;
     float: left;
 }
 .a2_right .css{
     float: left;
-    margin-top: 27px;
+    margin-top: 25px;
+    margin-left: 10px;
 }
 .a2_right .css .minCss{
-    font-size: 15px;
+    font-size: 21px;
     color: #cc8091;
-    font-weight: 700;
 }
 .a2_right .css .minText{
     font-size: 12px;
-    color: #cc8091;
+    color: #ada9a8;
+    margin: 0px;
+}
+.a3 {
+   margin-top: 70px;
+}
+.a3_left {
+    width: 415px;
+    float: left;
+}
+#enTitle {
+    font-size: 42px;
+    font-weight: 700;
+    font-family: 'SimHei';
+    color: #11456b;
+    line-height: 42px;
+    margin: 0px;
+}
+#maxText2 {
+    font-size: 72px;
+    color: #f5e327;
+}
+#zhTitle {
+    font-size: 33px;
+    color: #11456b;
+    font-family: 'SimHei';
+    margin: 0px;
+    line-height: 49px;
+}
+.blueLine {
+    width: 100%;
+    height: 2px;
+    background: #11456b;
+    display: inline-block;
+    margin-top: 8px;
+}
+#maxText3 {
+    font-size: 70px;
+    color: #f5e327;
+    float: left;
+    margin: 5px 5px 0px 0px;
+}
+.a3_left p {
+    margin-top: 20px;
+    color: #767777;
+}
+.a3_left img {
+    float: right;
+    margin: 15px 5px 15px 15px;
+}
+.a3_right {
+    width: 458px;
+    float: right;
+}
+.a3_right img {
+    width: 458px;
+    height: 257px;
+}
+.a3_img {
+    width: 458px;
+    height: 257px;
+    position: relative;
+}
+.img_text {
+    width: 100%;
+    height: 61px;
+    position: absolute;
+    bottom: 0px;
+    background:rgba(0,0,0,0.4);
+}
+#greenLine {
+    width: 3px;
+    height: 44px;
+    background: #72b164;
+    display: inline;
+    position: absolute;
+    left: 35px;
+    top: 8px;
+}
+#imgTitle {
+    font-size: 26px;
+    color: #ffffff;
+    margin: 12px 0px 0px 50px;
+    font-weight: 400;
+}
+#imgSubTitle {
+    font-size: 12px;
+    color: #72b164;
+    position: absolute;
+    left: 160px;
+    bottom: 16px;
+}
+.a3_right_2 {
+    background: #eeedd6;
+    margin-top: 30px;
+}
+.a3_right_2 ul {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.a3_right_2 li {
+    list-style: none;
+    margin: 20px 0px;
+    font-size: 16px;
+    font-family: 'SimSong';
+    color: #5a5b5b;
+}
+.a3_right_2 li em {
+    display: block;
+    border: 5px solid;
+    border-color: #eeedd6 #eeedd6 #10446b #eeedd6;
+    width: 0px;
+    height: 0px;
+    float: left;
+    margin: 5px 5px 0 0;
 }
