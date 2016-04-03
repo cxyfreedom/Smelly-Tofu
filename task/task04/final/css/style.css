@@ -1,0 +1,49 @@
+html{
+    height: 100%;
+}
+body{
+    position: relative;
+    min-width: 400px;
+    min-height: 200px;
+    height: 100%;
+}
+
+.main{
+    width: 400px;
+    height: 200px;
+    background-color: #ccc;
+    /* 自适应 */
+    /*position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    margin:auto;*/
+    /* margin负值 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -100px;
+    overflow: hidden;
+}
+
+.left-top{
+    width: 100px;
+    height: 100px;
+    background: #fc0;
+    border-radius: 50px;
+    position: absolute;
+    left: -50px;
+    top: -50px;
+}
+
+.right-bottom{
+    width: 100px;
+    height: 100px;
+    background: #fc0;
+    border-radius: 50px;
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+}
