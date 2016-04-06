@@ -15,6 +15,8 @@ var aqiData = {};
 function addAqiData() {
 	var city = document.getElementById('aqi-city-input').value;
 	var value = document.getElementById('aqi-value-input').value;
+    city = city.replace(/\s+/g,"");
+    value = value.replace(/\s+/g,"");
 	var cityRegex = /[a-zA-Z\u4E00-\u9FA5]/
 	if(!cityRegex.exec(city)){
 		alert('城市名称只能输入英文或者中文字符');
@@ -37,10 +39,10 @@ function renderAqiList() {
 		aqiTable += "<tr><td>"+key+"</td><td>"+aqiData[key]+"</td><td><button value='"+key+"'>删除</button></td></tr>"
 	}
 	document.getElementById("aqi-table").innerHTML = aqiTable;
-	buttonList = document.getElementById('aqi-table').getElementsByTagName('button');
+	var buttonList = document.getElementById('aqi-table').getElementsByTagName('button');
 	if(buttonList){
 		for(var i=0;i<buttonList.length;++i){
-		buttonList[i].addEventListener('click',function(){delBtnHandle(buttonList[i].value)},false);
+		    buttonList[i].addEventListener('click',function(){delBtnHandle(this.value)},false);
 		}
 	}
 }
