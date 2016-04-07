@@ -63,10 +63,19 @@ function renderChart() {
  */
 function graTimeChange() {
   // 确定是否选项发生了变化 
-
-  // 设置对应数据
-
-  // 调用图表渲染函数
+  var redioList = document.getElementById('form-gra-time').getElementsByTagName('input');
+  var time = "";
+  for (var i=0; i<redioList.length; ++i){
+    if (redioList[i].checked){
+      time = redioList[i].value;
+    }
+  }
+  if(time != pageState.nowGraTime){
+    // 设置对应数据
+    pageState.nowGraTime = time;
+    // 调用图表渲染函数    
+    initAqiChartData();  
+  }
 }
 
 /**
@@ -74,21 +83,25 @@ function graTimeChange() {
  */
 function citySelectChange() {
   // 确定是否选项发生了变化 
-
-  // 设置对应数据
-
-  // 调用图表渲染函数
+  var select = document.getElementById('city-select').value;
+  if(select != pageState.nowSelectCity){
+    // 设置对应数据
+    pageState.nowSelectCity = select;
+    // 调用图表渲染函数
+    initAqiChartData();
+  }
 }
 
 /**
  * 初始化日、周、月的radio事件，当点击时，调用函数graTimeChange
  */
 function initGraTimeForm() {
-  var redioList = document.getElementById('for-gra-time').getElementsByTagName('input');
+  var redioList = document.getElementById('form-gra-time').getElementsByTagName('input');
   for (var i=0; i<redioList.length; ++i){
-    if (redioList[i].checked=="checked"){
-      graTimeChange(redioList[i].value);
-    }
+      redioList[i].addEventListener('change',graTimeChange,false);
+      if(redioList[i].checked){
+          pageState.nowGraTime = redioList[i].value;
+      }
   }
 }
 
@@ -97,9 +110,15 @@ function initGraTimeForm() {
  */
 function initCitySelector() {
   // 读取aqiSourceData中的城市，然后设置id为city-select的下拉列表中的选项
-
+  var optionList = "";
+  var select = document.getElementById('city-select');
+  for ( var key in aqiSourceData){
+      optionList += "<option>"+key+"</option>";
+  }
+  select.innerHTML=optionList;
   // 给select设置事件，当选项发生变化时调用函数citySelectChange
-
+  select.addEventListener('change', citySelectChange, false);
+  pageState.nowSelectCity = select.value;
 }
 
 /**
@@ -108,14 +127,53 @@ function initCitySelector() {
 function initAqiChartData() {
   // 将原始的源数据处理成图表需要的数据格式
   // 处理好的数据存到 chartData 中
+  var aqiCityData = aqiSourceData[pageState.nowSelectCity];
+  var count = 0;
+  chartData = {};
+  switch (pageState.nowGraTime){
+    case 'week':
+      var weekCount = 0;
+      for (var key in aqiCityData){
+        if(weekCount == 7){
+          chartData[count] = chartData[count]/weekCount
+          weekCount = 0;
+          ++count;
+        }
+        chartData[count]?true:chartData[count]=0;
+        chartData[count] += aqiCityData[key];
+        ++weekCount;
+      }
+      break;
+    case 'month':
+      var month = "";
+      for (var key in aqiCityData){
+        if(key.split('-')[1] != month){
+          if(month){
+            ++count;              
+          }
+          month = key.split('-')[1];
+        }
+        chartData[count]?true:chartData[count]=0;
+        chartData[count] += aqiCityData[key];
+      }
+      break;
+    case 'day':
+      for (var key in aqiCityData){
+        chartData[count]?true:chartData[count]=0;
+        chartData[count] += aqiCityData[key];
+        ++count;
+      }
+      break;
+  }
+  console.log(chartData);
 }
 
 /**
  * 初始化函数
  */
 function init() {
-  initGraTimeForm()
-  initCitySelector();
+  var time = initGraTimeForm()
+  var day = initCitySelector();
   initAqiChartData();
 }
 
