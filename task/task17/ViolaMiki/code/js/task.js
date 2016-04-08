@@ -55,7 +55,22 @@ var pageState = {
  * 渲染图表
  */
 function renderChart() {
-
+  var chartHTML = "";
+  var width = {'day':10,'week':40,'month':60};
+  var margin = {'day':5,'week':40,'month':80};
+  var chart = document.getElementById('aqi-chart-wrap');
+  var colorArray = ['red','black','blue','green','grey'];
+  var color = "";
+  for (var key in chartData){
+    color = colorArray[Math.floor(Math.random()*colorArray.length)];
+    chartHTML += "<div style='height:"+chartData[key]+"px; width:"+width[pageState.nowGraTime]+"px; background:"+color+"; margin:0px "+margin[pageState.nowGraTime]+"px' title='"+key+"空气质量指数："+chartData[key]+"'></div>";
+  }
+  chart.innerHTML=chartHTML;
+  chartBar = chart.getElementsByTagName('div');
+  for (var i=0; i<chartBar.length; ++i){
+    chartBar[i].addEventListener('mousein',function(){showTitle(this.title)});
+    chartBar[i].addEventListener('mouseout',hiddenTitle);
+  }
 }
 
 /**
@@ -133,39 +148,79 @@ function initAqiChartData() {
   switch (pageState.nowGraTime){
     case 'week':
       var weekCount = 0;
+      var day = '';
+      var dayKey = '';
+      var week = 1;
       for (var key in aqiCityData){
         if(weekCount == 7){
-          chartData[count] = chartData[count]/weekCount
+          chartData[dayKey] /= weekCount;
+          chartData[dayKey] = chartData[dayKey].toFixed(2);
           weekCount = 0;
-          ++count;
+          if(key.split('-')[1] != day[1]){
+            day = key.split('-');
+            week = 0;
+          }
+          ++week;
+          dayKey = day[0]+'-'+day[1]+'-第'+week+'周';
+        }else if(!dayKey){
+          day = key.split('-');
+          dayKey = day[0]+'-'+day[1]+'-第'+week+'周';
         }
-        chartData[count]?true:chartData[count]=0;
-        chartData[count] += aqiCityData[key];
+        chartData[dayKey]?true:chartData[dayKey]=0;
+        chartData[dayKey] += aqiCityData[key];
         ++weekCount;
       }
+      chartData[dayKey] /= weekCount;
+      chartData[dayKey] = chartData[dayKey].toFixed(2);
       break;
     case 'month':
       var month = "";
+      var monthDay = 0;
       for (var key in aqiCityData){
         if(key.split('-')[1] != month){
           if(month){
-            ++count;              
+            chartData[count] /= monthDay;
+            chartData[count] = chartData[count].toFixed(2);
+            monthDay = 0;
+            count=key.substring(0,7);            
           }
           month = key.split('-')[1];
+          count=key.substring(0,7);
         }
         chartData[count]?true:chartData[count]=0;
         chartData[count] += aqiCityData[key];
+        monthDay++;
       }
+      chartData[count] /= monthDay;
+      chartData[count] = chartData[count].toFixed(2);
       break;
     case 'day':
       for (var key in aqiCityData){
-        chartData[count]?true:chartData[count]=0;
-        chartData[count] += aqiCityData[key];
-        ++count;
+        chartData[key] = aqiCityData[key];
       }
       break;
   }
-  console.log(chartData);
+  renderChart();
+}
+
+/**
+ * 显示悬浮层
+ */
+function showTitle(title) {
+  var x,y; 
+  x = event.clientX; 
+  y = event.clientY; 
+  document.getElementById("popLayout").style.left = x; 
+  document.getElementById("popLayout").style.top = y; 
+  document.getElementById("popLayout").innerText = title; 
+  document.getElementById("popLayout").style.display = "block"; 
+}
+
+/**
+ * 隐藏悬浮层
+ */
+function hiddenTitle(){
+  document.getElementById("popLayout").style.display = "none"; 
 }
 
 /**
