@@ -4,7 +4,7 @@ var chartData = [];
  * 随机生成数据
  */
 function initChart() {
-    for (var i = 0; i < 15; ++i) {
+    for (var i = 0; i < 30; ++i) {
         chartData.push(parseInt(Math.random() * 90 + 10));
     }
 }
@@ -18,8 +18,7 @@ function showChart(arr) {
     var max = Math.max.apply(null,arr)
     
     for (var i = 0; i < arr.length; ++i) {
-        var hue =i / 10 * 360;
-        chartString += "<div id=" + i + " style='height:" + arr[i] * 3 + "px; width:20px; background:"+"hsl(" + hue + ", 100%, 50%)"+"; margin:0px 10px; order: " + i + " '></div>";
+        chartString += "<div id=" + i + " style='height:" + arr[i] * 3 + "px; width:16px; background:red; margin:0px 2px; order: " + i + " '></div>";
     }
     document.getElementById('chart-area').innerHTML = chartString;
 }
@@ -66,9 +65,15 @@ function changeChart(id) {
     var num = document.getElementById('num').value;
     switch (id) {
         case 'leftin':
-            chartData.unshift(num); break;
+            if(checkInput(num)){
+               chartData.unshift(num);  
+            }
+            break;               
         case 'rightin':
-            chartData.push(num); break;
+            if(checkInput(num)){
+                chartData.push(num);
+            }
+            break;
         case 'leftout':
             chartData.shift(num); break;
         case 'rightout':
@@ -77,6 +82,25 @@ function changeChart(id) {
             sort(); break;
     }
     showChart(chartData);
+}
+
+/**
+ * 输入检测
+ */
+function checkInput(num){
+    if(chartData.length>=60){
+        alert("排序限制最多60个数据");
+        return false;
+    }
+    if(!num.match(/^[0-9]+$/)){
+        alert("只能输入数字");
+        return false;
+    }
+    if(num<10 || num>100){
+        alert("数据范围在10-100中间");
+        return false;
+    }
+    return true;
 }
 
 function init() {
