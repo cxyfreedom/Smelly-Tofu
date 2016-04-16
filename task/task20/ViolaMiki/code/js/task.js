@@ -37,6 +37,7 @@ function initQueue(id) {
         case 'rightout':
             queueData.pop(num);
             showQueue();break;
+        //搜索字符串
         case 'search':
             var searchString = document.getElementById('searchString').value;
             for (var i=0;i<queueData.length;++i){
