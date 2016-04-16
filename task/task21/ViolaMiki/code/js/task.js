@@ -103,6 +103,7 @@ function init() {
         var index = this.queueData.indexOf(num.split(" ")[1]);
         this.queueData.splice(index,1);
         this.showQueue();
+        this.addEvent();
     }
     var hobby = document.getElementById('hobby');
     var button = document.getElementById('hobbyButton');
