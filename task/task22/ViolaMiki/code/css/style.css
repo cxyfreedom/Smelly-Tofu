@@ -1,0 +1,32 @@
+* {
+    background: white;
+}
+#root{
+    width: 800px;
+    height: 200px;
+    border: 1px solid black;
+}
+.leaf1{
+    width: 375px;
+    height: 180px;
+    float: left;
+    margin: 10px;
+    border: 1px solid black;
+}
+.leaf2{
+    width: 162px;
+    height: 160px;
+    float: left;
+    margin: 10px;
+    border: 1px solid black;
+}
+.leaf3{
+    width: 59px;
+    height: 140px;
+    float: left;
+    margin: 10px;
+    border: 1px solid black;
+}
+.clear{
+    clear: both;
+}
